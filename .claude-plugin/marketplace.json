@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "award-travel-finder",
+  "version": "1.0.0",
+  "description": "Search award flight availability and compare loyalty programs",
+  "owner": {
+    "name": "Award Travel Finder",
+    "url": "https://awardtravelfinder.com"
+  },
+  "plugins": [
+    {
+      "name": "award-travel-finder",
+      "description": "Search award flight availability across British Airways, Qatar Airways, and Cathay Pacific. Compare 14 loyalty program award charts.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "award-travel-finder",
+  "description": "Search award flight availability across British Airways, Qatar Airways, and Cathay Pacific. Compare 14 loyalty program award charts.",
+  "author": {
+    "name": "Award Travel Finder",
+    "url": "https://awardtravelfinder.com"
+  },
+  "version": "1.0.0"
+}
