@@ -70,12 +70,6 @@ Get full award chart for a loyalty program. No auth needed.
 3. Focus comparison on the route/region they care about.
 4. Highlight which program offers the best value per cabin class.
 
-## Rate Limits
-
-- Free: 20 availability searches per session
-- Paid: Unlimited (API key tracked monthly)
-- `get_pricing`, `get_airports`, `list_programs`, `get_program_rates` don't count toward the limit
-
 ## API Key (Paid Users)
 
 For unlimited searches, add your API key to `~/.claude/mcp.json`:

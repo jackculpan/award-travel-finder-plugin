@@ -120,15 +120,6 @@ Uses `get_program_rates` for `british-airways` and `emirates`, then compares poi
 
 Uses `get_airports` with `airline: cathay_pacific`.
 
-## Rate Limits
-
-- **Free tier**: 20 availability searches per session
-- **Paid tier**: Unlimited (API key tracked monthly)
-- `get_pricing`, `get_airports`, `list_programs`, `get_program_rates` are unlimited
-- MCP server: 30 requests/min per IP
-
-Get an API key at [awardtravelfinder.com/pricing](https://awardtravelfinder.com/pricing)
-
 ## Resources
 
 - [Award Travel Finder](https://awardtravelfinder.com)

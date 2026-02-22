@@ -31,7 +31,7 @@ The `award-travel` skill activates automatically when you ask about award flight
 
 ## API Key (Optional)
 
-Free tier gives you 20 availability searches per session. For unlimited searches, get an API key at [awardtravelfinder.com/pricing](https://awardtravelfinder.com/pricing) and add it to `~/.claude/mcp.json`:
+For unlimited searches, get an API key at [awardtravelfinder.com/pricing](https://awardtravelfinder.com/pricing) and add it to `~/.claude/mcp.json`:
 
 ```json
 {
