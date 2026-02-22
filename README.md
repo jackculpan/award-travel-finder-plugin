@@ -29,9 +29,9 @@ The `award-travel` skill activates automatically when you ask about award flight
 
 > "Find me business class from London to New York using Avios"
 
-## API Key (Optional)
+## API Key (Required)
 
-For unlimited searches, get an API key at [awardtravelfinder.com/pricing](https://awardtravelfinder.com/pricing) and add it to `~/.claude/mcp.json`:
+Get your API key at [awardtravelfinder.com/pricing](https://awardtravelfinder.com/pricing) and add it to `~/.claude/mcp.json`:
 
 ```json
 {

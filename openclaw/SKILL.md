@@ -10,13 +10,9 @@ Search award flight availability and compare loyalty program award charts via th
 
 ## Setup
 
+An API key is required. Get yours at [awardtravelfinder.com/pricing](https://awardtravelfinder.com/pricing).
+
 ### Claude Code
-
-```bash
-claude mcp add awardtravelfinder --transport sse https://mcp.awardtravelfinder.com/mcp
-```
-
-With API key (paid, unlimited searches):
 
 ```bash
 claude mcp add awardtravelfinder --transport sse -H "X-API-Key: YOUR_KEY" https://mcp.awardtravelfinder.com/mcp
@@ -30,7 +26,10 @@ Add to your MCP config:
 {
   "mcpServers": {
     "awardtravelfinder": {
-      "url": "https://mcp.awardtravelfinder.com/mcp"
+      "url": "https://mcp.awardtravelfinder.com/mcp",
+      "headers": {
+        "X-API-Key": "your-api-key"
+      }
     }
   }
 }
@@ -39,7 +38,7 @@ Add to your MCP config:
 ### mcporter
 
 ```bash
-mcporter add awardtravelfinder --url https://mcp.awardtravelfinder.com/mcp
+mcporter add awardtravelfinder --url https://mcp.awardtravelfinder.com/mcp --header "X-API-Key: YOUR_KEY"
 ```
 
 ## Available Tools (7)
@@ -58,8 +57,8 @@ mcporter add awardtravelfinder --url https://mcp.awardtravelfinder.com/mcp
 
 | Tool | Description |
 |------|-------------|
-| `list_programs` | List all 14 loyalty programs with currencies, hubs, and destination counts. No auth needed. |
-| `get_program_rates` | Get full award chart for a specific program. All destinations with points per cabin class. No auth needed. |
+| `list_programs` | List all 14 loyalty programs with currencies, hubs, and destination counts. |
+| `get_program_rates` | Get full award chart for a specific program. All destinations with points per cabin class. |
 
 ## Airlines
 

@@ -48,10 +48,10 @@ List all airports an airline serves. Check route existence before searching.
 List airlines available for search. No parameters.
 
 ### list_programs
-List all 14 loyalty programs with award chart data. No auth needed. No parameters.
+List all 14 loyalty programs with award chart data. No parameters.
 
 ### get_program_rates
-Get full award chart for a loyalty program. No auth needed.
+Get full award chart for a loyalty program.
 
 **Parameters:**
 - `program`: Program slug (e.g. `british-airways`, `emirates`, `aeroplan`)
@@ -70,9 +70,9 @@ Get full award chart for a loyalty program. No auth needed.
 3. Focus comparison on the route/region they care about.
 4. Highlight which program offers the best value per cabin class.
 
-## API Key (Paid Users)
+## API Key (Required)
 
-For unlimited searches, add your API key to `~/.claude/mcp.json`:
+An API key is required. Add it to `~/.claude/mcp.json`:
 
 ```json
 {
