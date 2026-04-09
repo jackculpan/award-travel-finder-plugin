@@ -1,6 +1,6 @@
 ---
 name: award-travel
-description: This skill should be used when the user asks about "award flights", "points", "miles", "avios", "asia miles", "loyalty programs", "flight availability", "award search", "redemptions", "business class availability", "first class availability", mentions specific airlines (British Airways, Qatar Airways, Cathay Pacific), or discusses using points/miles for flights. Provides guidance for using the Award Travel Finder MCP tools.
+description: This skill should be used when the user asks about "award flights", "points", "miles", "avios", "asia miles", "loyalty programs", "flight availability", "award search", "redemptions", "business class availability", "first class availability", "hybrid flights", "cash and points", "split ticket", "positioning flights", "mix cash and miles", mentions specific airlines (British Airways, Qatar Airways, Cathay Pacific), or discusses using points/miles for flights. Provides guidance for using the Award Travel Finder MCP tools.
 version: 1.0.0
 ---
 
@@ -55,6 +55,25 @@ Get full award chart for a loyalty program.
 
 **Parameters:**
 - `program`: Program slug (e.g. `british-airways`, `emirates`, `aeroplan`)
+
+### search_hybrid
+Find the cheapest way to fly by combining cash tickets with award redemptions into one split-ticket journey. Best for premium cabins on long-haul routes. **Requires paid API key.**
+
+**Parameters:**
+- `origin`: 3-letter IATA code (e.g. LHR)
+- `destination`: 3-letter IATA code (e.g. JFK)
+- `date`: YYYY-MM-DD
+- `cabin`: `economy` | `business` | `first` (default: business)
+- `points_value_cents`: How you value points in cents per point (default: 1.5)
+
+Returns: direct cash price, best full-award option, and hybrid split options ranked by effective cost. Each hybrid option shows which leg to book with points and which with cash, via which connecting hub.
+
+## Workflow: Hybrid Search (Cash + Points)
+
+1. Use `search_hybrid` with origin, destination, date, and cabin class.
+2. Review the comparison: direct cash vs full award vs hybrid options.
+3. The best hybrid often uses cheap short-haul award positioning (e.g. 16,500 Avios LHR→DUB) combined with a cheaper cash long-haul from the hub.
+4. Warn the user about split-ticket risks: no IRROPS protection, carry-on only.
 
 ## Workflow: Finding Award Flights
 
