@@ -1,21 +1,22 @@
 ---
 name: award-travel-finder
-description: Search award flight availability across British Airways, Qatar Airways, and Cathay Pacific. Compare 14 loyalty program award charts. Uses the Award Travel Finder MCP server.
-homepage: https://awardtravelfinder.com
+description: Search award flight availability across 19 airlines and compare 14 loyalty program award charts via the Award Travel Finder MCP server. Find the best points and miles redemptions across British Airways, Qatar Airways, Cathay Pacific, Virgin Atlantic, Aeroplan, Iberia, Emirates, Qantas, Alaska, American, JetBlue, ANA, Singapore, Turkish, Etihad, Flying Blue, and more.
+homepage: https://awardtravelfinder.com/claude
 ---
 
 # Award Travel Finder
 
-Search award flight availability and compare loyalty program award charts via the Award Travel Finder MCP server. Find the best points and miles redemptions across British Airways, Qatar Airways, and Cathay Pacific.
+Search award flight availability and compare loyalty program award charts via the Award Travel Finder MCP server. 19 airlines, 14 loyalty programs, one prompt.
 
 ## Setup
 
-An API key is required. Get yours at [awardtravelfinder.com/pricing](https://awardtravelfinder.com/pricing).
+Free with a free awardtravelfinder.com account — 50 searches/month. On first tool call the client opens your browser to sign up via OAuth (~30 seconds). Paid tiers (150/month and up) at [awardtravelfinder.com/pricing](https://awardtravelfinder.com/pricing).
 
-### Claude Code
+### Claude Code (recommended)
 
-```bash
-claude mcp add awardtravelfinder --transport sse -H "X-API-Key: YOUR_KEY" https://mcp.awardtravelfinder.com/mcp
+```
+/plugin marketplace add jackculpan/award-travel-finder-plugin
+/plugin install award-travel-finder
 ```
 
 ### Claude Desktop / Cursor
@@ -26,66 +27,75 @@ Add to your MCP config:
 {
   "mcpServers": {
     "awardtravelfinder": {
-      "url": "https://mcp.awardtravelfinder.com/mcp",
-      "headers": {
-        "X-API-Key": "your-api-key"
-      }
+      "type": "url",
+      "url": "https://mcp.awardtravelfinder.com/mcp"
     }
   }
 }
 ```
 
-### mcporter
+OAuth-aware clients sign you in on first call automatically. For clients without native OAuth, use `npx mcp-remote https://mcp.awardtravelfinder.com/mcp`.
 
-```bash
-mcporter add awardtravelfinder --url https://mcp.awardtravelfinder.com/mcp --header "X-API-Key: YOUR_KEY"
-```
+### Legacy X-API-Key
 
-## Available Tools (7)
+Header-based auth is still supported for users who configured it pre-OAuth, or for server-to-server agents. Generate a key at [awardtravelfinder.com/pricing](https://awardtravelfinder.com/pricing) and pass `X-API-Key: atf_...`.
 
-### Search & Availability
+## Available Tools (21)
 
-| Tool | Description |
-|------|-------------|
-| `search_availability` | Search award seats for a specific route and date. Returns cabin-by-cabin availability with points costs. |
-| `search_monthly_availability` | Search an entire month for availability. Day-by-day results across all cabin classes. Up to 90s. |
-| `get_pricing` | Get the award chart for a route. Points per cabin class, off-peak and peak. No date needed. |
-| `get_airports` | List all airports served by an airline. Check if a route exists before searching. |
-| `list_supported_airlines` | List airlines available for search with codes and currencies. |
-
-### Loyalty Programs
+### Flight search
 
 | Tool | Description |
 |------|-------------|
-| `list_programs` | List all 14 loyalty programs with currencies, hubs, and destination counts. |
-| `get_program_rates` | Get full award chart for a specific program. All destinations with points per cabin class. |
+| `search_availability` | Award seats for a specific route and date. Returns cabin-by-cabin availability. |
+| `search_monthly_availability` | Calendar view for a whole month, one airline. Up to 90s. |
+| `search_all_airlines` | Fan out a single date across every supported airline at once. |
+| `search_hybrid` | Cash + points side-by-side, with hub/connection logic for split-ticket journeys. |
+| `get_pricing` | Award chart for a route. Points per cabin class, off-peak and peak. |
 
-## Airlines
+### Loyalty programs
 
-| Airline | Slug | Code | Currency |
-|---------|------|------|----------|
-| British Airways | `british_airways` | BA | Avios |
-| Qatar Airways | `qatar_airways` | QR | Avios |
-| Cathay Pacific | `cathay_pacific` | CX | Asia Miles |
+| Tool | Description |
+|------|-------------|
+| `get_program_rates` | Full award chart for a specific program — zones, cabin pricing, partner rules. |
+| `get_buy_points_pricing` | Current "buy miles" promotions. |
+| `get_status_matches` | Programs that status-match a given tier, and how long it lasts. |
+
+### Hotels
+
+`search_hotels`, `get_hotel_availability`, `monitor_hotel_price`, `list_hotel_bookings`, `get_hotel_booking`
+
+### Trip portfolio (per user)
+
+`add_flight_booking`, `list_flight_bookings`, `get_flight_booking`, `update_flight_booking`, `delete_flight_booking`, `update_points_balance`, `list_points_balances`, `get_portfolio`
+
+## Airlines (19)
+
+**Oneworld** — British Airways (BA), Cathay Pacific (CX), Iberia (IB), Qatar Airways (QR), American Airlines (AA), Alaska Airlines (AS), Qantas (QF), Japan Airlines (JL)
+
+**SkyTeam** — Air France / KLM, Korean Air
+
+**Star Alliance** — Singapore Airlines, ANA, Turkish Airlines, Aeroplan / Air Canada
+
+**Non-aligned / partners** — Virgin Atlantic (VS), Emirates (EK), Etihad (EY), JetBlue (B6), Frontier (F9)
 
 ## Loyalty Programs (14)
 
 | Program | Slug | Currency |
 |---------|------|----------|
-| Virgin Atlantic | `virgin-atlantic` | Virgin Points |
 | British Airways | `british-airways` | Avios |
+| Iberia | `iberia` | Avios |
 | Qatar Airways | `qatar-airways` | Avios |
-| Singapore Airlines | `singapore-airlines` | KrisFlyer Miles |
+| Aer Lingus | `aer-lingus` | Avios |
+| Virgin Atlantic | `virgin-atlantic` | Virgin Points |
+| Aeroplan | `aeroplan` | Aeroplan Points |
+| Flying Blue | `flying-blue` | Flying Blue Miles |
 | Cathay Pacific | `cathay-pacific` | Asia Miles |
+| Singapore Airlines | `singapore-airlines` | KrisFlyer Miles |
 | Emirates | `emirates` | Skywards Miles |
 | Etihad | `etihad` | Guest Miles |
-| Flying Blue | `flying-blue` | Flying Blue Miles |
-| Aeroplan | `aeroplan` | Aeroplan Points |
-| Turkish Airlines | `turkish-airlines` | Miles&Smiles |
-| ANA | `ana` | ANA Miles |
+| Turkish Airlines | `turkish-airlines` | Miles & Smiles |
+| ANA | `ana` | Mileage Club |
 | JetBlue | `jetblue` | TrueBlue Points |
-| Jet2 Emirates | `jet2-emirates` | Emirates Miles |
-| Virgin Partners | `virgin-partners` | Virgin Points |
 
 ## Usage Examples
 
@@ -93,34 +103,35 @@ mcporter add awardtravelfinder --url https://mcp.awardtravelfinder.com/mcp --hea
 
 > Find BA business class availability from LHR to JFK on April 15th 2026
 
-Uses `get_pricing` then `search_availability` with `airline: british_airways`, `departure_code: LHR`, `arrival_code: JFK`, `date: 2026-04-15`.
+Uses `get_pricing` then `search_availability`.
 
 ### Search Flexible Dates
 
 > Show me Qatar Airways availability from Doha to Singapore for all of May
 
-Uses `search_monthly_availability` with `airline: qatar_airways`, `departure_code: DOH`, `arrival_code: SIN`, `date: 2026-05`.
+Uses `search_monthly_availability`.
 
-### Check Pricing
+### Search Across Every Airline
 
-> How many Avios for London to New York in first class?
+> What's available JFK→NRT in business class on November 14th 2026?
 
-Uses `get_pricing` with `airline: british_airways`, `departure_code: LHR`, `arrival_code: JFK`.
+Uses `search_all_airlines`.
 
-### Compare Programs
+### Multi-Program Comparison
 
-> Compare British Airways and Emirates award charts
+> For LHR→HND in business, compare Avios, Aeroplan, Flying Blue, and Virgin Points. Include taxes and fuel surcharges.
 
-Uses `get_program_rates` for `british-airways` and `emirates`, then compares points per cabin class by destination.
+Uses `get_pricing` and `get_program_rates`.
 
-### Check Airport Coverage
+### Cash vs Points (Hybrid)
 
-> What airports does Cathay Pacific fly to?
+> SFO→LIS Oct 12 2026, business class. Show cash fare and the best hybrid split-ticket option.
 
-Uses `get_airports` with `airline: cathay_pacific`.
+Uses `search_hybrid`.
 
 ## Resources
 
+- [Award Travel Finder for Claude Code](https://awardtravelfinder.com/claude) — Plugin landing page
 - [Award Travel Finder](https://awardtravelfinder.com)
 - [MCP Server Docs](https://mcp.awardtravelfinder.com)
 - [Pricing & API Keys](https://awardtravelfinder.com/pricing)

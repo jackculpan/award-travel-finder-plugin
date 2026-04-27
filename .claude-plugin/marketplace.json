@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "award-travel-finder",
   "version": "1.0.0",
-  "description": "Search award flight availability and compare loyalty programs",
+  "description": "Search award flight availability across 19 airlines and compare 14 loyalty programs",
   "owner": {
     "name": "Award Travel Finder",
     "url": "https://awardtravelfinder.com"
@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "award-travel-finder",
-      "description": "Search award flight availability across British Airways, Qatar Airways, and Cathay Pacific. Compare 14 loyalty program award charts.",
+      "description": "Search award flight availability across 19 airlines (British Airways, Qatar, Cathay, Virgin Atlantic, Aeroplan, Iberia, Emirates, Qantas, Alaska, American, and more) and compare 14 loyalty program award charts. Free with a free awardtravelfinder.com account (50 searches/month).",
       "source": "./",
       "category": "productivity"
     }
